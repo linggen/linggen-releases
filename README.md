@@ -1,63 +1,87 @@
-# 🚀 Linggen Releases
+<p align="center">
 
-<p align="left">
-  <img src="assets/logo.svg" alt="Linggen logo" width="80" />
+  <img src="./assets/logo.svg" alt="Linggen Logo" width="120" />
+
+  <br />
+
+<a href="https://linggen.dev">https://linggen.dev</a>
+
 </p>
 
-**Linggen — your AI memory layer for code.**  
-This repository hosts **pre-built Linggen desktop app binaries** (e.g., `.dmg`, `.deb`) for end-user installation.  
-It is **not** the main source code repository.
+## Linggen
+
+**Linggen** is a **local-first RAG + MCP memory layer** for AI coding assistants.
+
+It runs entirely on your machine, is **free for individuals and teams**, and is built for:
+
+- **Working across many projects** with one shared memory layer
+
+- **Navigating huge codebases and documentation sets**
+
+- **Connecting multiple IDEs/agents via MCP** (Cursor, Zed, Windsurf, etc.)
+
+Nothing leaves your machine by default: embeddings, indexes, and search all run locally.
+
+![Linggen app – Sources view](./assets/sources.png)
 
 ---
 
-## 🔍 What is Linggen?
+## What You Can Do
 
-Linggen is a **memory + intent layer for AI coding tools** such as Cursor, VS Code, ChatGPT, Claude, and local LLMs.  
-It automatically supplies the right context so your AI can reason more deeply about your project.
+- **Index your world**: local folders, codebases, docs, and notes
 
-### Key capabilities
+- **Semantic search + AI chat** over everything you've indexed
 
-- **Local-first, privacy-first**  
-  All code, embeddings, profiles, and memory stay on your machine unless you explicitly enable cloud features.
+- **Expose an MCP server** at `http://localhost:8787/mcp/sse` for compatible tools
 
-- **Long-term project memory**  
-  Remembers your project architecture, decisions, patterns, and personal preferences over time.
+- **Run it for a team** on a shared machine and point everyone's MCP config at it
 
-- **Smarter prompts with less typing**  
-  You type short instructions; Linggen injects the correct context (code, docs, history, memory) before sending to the AI.
+See the full product docs at **[linggen.dev](https://linggen.dev)**.
 
 ---
 
-## 📦 Downloads & Installation
+## Install (App)
 
-1. Visit the **[Releases](../../releases)** page of this repository.
-2. Download the binary for your OS and architecture (e.g., `Linggen-macos-arm64.dmg`, `Linggen-linux-x86_64.deb`).
-3. Install as a normal desktop application.
-4. Launch **Linggen** — the app starts a local backend and opens the UI in your browser: http://localhost:8787
+- Download the latest macOS build from GitHub Releases:
 
----
+  `https://github.com/linggen/linggen-releases/releases`
 
-## 🔌 Using Linggen in Cursor (MCP)
+- Open the `.dmg` and drag **Linggen** into `Applications`.
 
-1. Open **Cursor → Settings → MCP**
-2. Add a new MCP server:
-   - **Name:** `linggen`
-   - **URL:** `http://localhost:8787/mcp/sse`
-3. Save the configuration.
-4. Ensure the Linggen app is running locally.
-5. Use Cursor’s MCP features — Cursor will communicate directly with Linggen for context & memory.
+- On first launch, it downloads an embedding model (~100MB) and starts a local backend at `http://localhost:8787`.
+
+> Currently macOS only. Windows & Linux are planned.
 
 ---
 
-## 🔐 Privacy & Licensing
+## MCP Setup (Cursor)
 
-- Linggen is **local-first and privacy-focused**.  
-  Your code, memories, and embeddings remain on your own machine by default.
+Linggen starts an MCP server at `http://localhost:8787/mcp/sse`.
 
-- The software is **proprietary**.  
-  All rights reserved. Unauthorized redistribution, modification, hosting, or resale are **strictly prohibited**.
+Add this to `~/.cursor/mcp.json` to connect Cursor:
 
-- Usage requires a valid license agreement.
+```json
+{
+  "mcpServers": {
+    "linggen": {
+      "url": "http://localhost:8787/mcp/sse"
+    }
+  }
+}
+```
 
-For licensing, team deployment, or general inquiries, contact:  
-📧 **linggen77@gmail.com**
+Restart Cursor and you should see `linggen` as a connected MCP server.
+
+---
+
+## This Repo
+
+This repo is the **Linggen landing page and docs site**, built with **React** and **Vite**, deployed to **Cloudflare Pages**.
+
+```bash
+
+npm install
+
+npm run dev
+
+```
