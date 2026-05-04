@@ -1,64 +1,51 @@
 <p align="center">
-
   <img src="./assets/logo.svg" alt="Linggen Logo" width="120" />
-
   <br />
-
-<a href="https://linggen.dev">https://linggen.dev</a>
-
+  <a href="https://linggen.dev">https://linggen.dev</a>
 </p>
 
-## Linggen
+## Linggen Releases
 
-**Linggen** is a **local-first RAG + MCP memory layer** for AI coding assistants.
+Public download host for Linggen apps. macOS only for now.
 
-It runs entirely on your machine, is **free for individuals and teams**, and is built for:
+All builds are codesigned and notarized.
 
-- **Working across many projects** with one shared memory layer
+---
 
-- **Navigating huge codebases and documentation sets**
+## Apps
 
-- **Connecting multiple IDEs/agents via MCP** (Cursor, Zed, Windsurf, etc.)
+### Linggen
 
-Nothing leaves your machine by default: embeddings, indexes, and search all run locally.
+Local-first RAG + MCP memory layer for AI coding assistants. Index codebases, docs, and notes; semantic search and chat over them; expose an MCP server at `http://localhost:8787/mcp/sse` for Cursor, Zed, Windsurf, etc.
+
+- Download: [latest release](https://github.com/linggen/linggen-releases/releases?q=linggen-v&expanded=true)
+- Tag scheme: `linggen-v<version>`
+- Docs: [linggen.dev](https://linggen.dev)
 
 ![Linggen app – Sources view](./assets/sources.png)
 
----
+### Sys Doctor
 
-## What You Can Do
+On-device macOS diagnostic agent. Inspects disk, memory, processes, network, and logs; explains what it finds in plain English.
 
-- **Index your world**: local folders, codebases, docs, and notes
-
-- **Semantic search + AI chat** over everything you've indexed
-
-- **Expose an MCP server** at `http://localhost:8787/mcp/sse` for compatible tools
-
-- **Run it for a team** on a shared machine and point everyone's MCP config at it
-
-See the full product docs at **[linggen.dev](https://linggen.dev)**.
+- Download: [latest release](https://github.com/linggen/linggen-releases/releases?q=sys-doctor-v&expanded=true)
+- Tag scheme: `sys-doctor-v<version>`
 
 ---
 
-## Install (App)
+## Install
 
-- Download the latest macOS build from GitHub Releases:
+1. Download the `.dmg` for the app you want.
+2. Open it and drag the app into `Applications`.
+3. On first launch, the shared Linggen engine downloads (~50 MB) and starts a local daemon at `http://127.0.0.1:9898`.
 
-  `https://github.com/linggen/linggen-releases/releases`
-
-- Open the `.dmg` and drag **Linggen** into `Applications`.
-
-- On first launch, it downloads an embedding model (~100MB) and starts a local backend at `http://localhost:8787`.
-
-> Currently macOS only. Windows & Linux are planned.
+> All Linggen apps share one local engine and one `~/.linggen/` data directory.
 
 ---
 
 ## MCP Setup (Cursor)
 
-Linggen starts an MCP server at `http://localhost:8787/mcp/sse`.
-
-Add this to `~/.cursor/mcp.json` to connect Cursor:
+Add to `~/.cursor/mcp.json`:
 
 ```json
 {
@@ -70,18 +57,4 @@ Add this to `~/.cursor/mcp.json` to connect Cursor:
 }
 ```
 
-Restart Cursor and you should see `linggen` as a connected MCP server.
-
----
-
-## This Repo
-
-This repo is the **Linggen landing page and docs site**, built with **React** and **Vite**, deployed to **Cloudflare Pages**.
-
-```bash
-
-npm install
-
-npm run dev
-
-```
+Restart Cursor; `linggen` should appear as a connected MCP server.
