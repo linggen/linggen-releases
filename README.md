@@ -6,55 +6,40 @@
 
 ## Linggen Releases
 
-Public download host for Linggen apps. macOS only for now.
+Public download host for branded Linggen apps on macOS. All published builds are codesigned and notarized.
 
-All builds are codesigned and notarized.
+> **Linggen** is a local AI app engine — the core runtime ([engine source](https://github.com/linggen/linggen)) hosts skills as full-featured native apps. Each branded app bundles the engine + a primary skill into one `.app`. Apps share a local daemon (`http://127.0.0.1:9898`) and the `~/.linggen/` data directory.
 
 ---
 
 ## Apps
 
-### Linggen
+### Sys Doctor — *coming soon*
 
-Local-first RAG + MCP memory layer for AI coding assistants. Index codebases, docs, and notes; semantic search and chat over them; expose an MCP server at `http://localhost:8787/mcp/sse` for Cursor, Zed, Windsurf, etc.
+On-device macOS health analyst. Inspects disk, memory, processes, network, security, and battery; explains findings in plain English; suggests cleanup with copy-paste commands.
 
-- Download: [latest release](https://github.com/linggen/linggen-releases/releases?q=linggen-v&expanded=true)
-- Tag scheme: `linggen-v<version>`
-- Docs: [linggen.dev](https://linggen.dev)
+- Tag scheme (when released): `sys-doctor-v<version>`
+- Source: [linggen/linggen-app](https://github.com/linggen/linggen-app) (private)
 
-![Linggen app – Sources view](./assets/sources.png)
-
-### Sys Doctor
-
-On-device macOS diagnostic agent. Inspects disk, memory, processes, network, and logs; explains what it finds in plain English.
-
-- Download: [latest release](https://github.com/linggen/linggen-releases/releases?q=sys-doctor-v&expanded=true)
-- Tag scheme: `sys-doctor-v<version>`
+*More branded apps planned (House Keeper, Majiang, Suanming, …) — see the roadmap.*
 
 ---
 
-## Install
+## Install (once a DMG is published)
 
-1. Download the `.dmg` for the app you want.
-2. Open it and drag the app into `Applications`.
-3. On first launch, the shared Linggen engine downloads (~50 MB) and starts a local daemon at `http://127.0.0.1:9898`.
+1. Download the `.dmg` for the app you want from [Releases](https://github.com/linggen/linggen-releases/releases).
+2. Open it; drag the app into `/Applications`.
+3. First launch: the app spawns the bundled `ling` engine on `127.0.0.1:9898` (or reuses one already running). The daemon self-terminates after 5 min idle.
 
-> All Linggen apps share one local engine and one `~/.linggen/` data directory.
+All Linggen apps share one local daemon and one `~/.linggen/` directory (sessions, memory, skills, credentials).
 
 ---
 
-## MCP Setup (Cursor)
+## Tag schemes
 
-Add to `~/.cursor/mcp.json`:
+| Tag pattern | Where | What |
+|---|---|---|
+| `<app>-v<version>` | this repo | branded native app `.dmg` (e.g. `sys-doctor-v0.1.0`) |
+| `v<version>` | [`linggen/linggen`](https://github.com/linggen/linggen/releases) | the `ling` CLI / engine binary on its own |
 
-```json
-{
-  "mcpServers": {
-    "linggen": {
-      "url": "http://localhost:8787/mcp/sse"
-    }
-  }
-}
-```
-
-Restart Cursor; `linggen` should appear as a connected MCP server.
+The engine binary is **not** published here. Branded apps bundle their own copy of `ling`; this repo only hosts the user-facing app DMGs.
