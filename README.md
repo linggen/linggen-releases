@@ -8,7 +8,7 @@
 
 Public download host for branded Linggen apps on macOS. All published builds are codesigned and notarized.
 
-> **Linggen** is a local AI app engine — the core runtime ([engine source](https://github.com/linggen/linggen)) hosts skills as full-featured native apps. Each branded app bundles the engine + a primary skill into one `.app`. Apps share a local daemon (`http://127.0.0.1:9898`) and the `~/.linggen/` data directory.
+> **Linggen** is a local AI app engine — the core runtime ([engine source](https://github.com/linggen/linggen)) hosts skills as full-featured native apps. Each branded app bundles the engine + a primary skill into one `.app`. Apps share a local daemon (`http://127.0.0.1:9527`) and the `~/.linggen/` data directory.
 
 ---
 
@@ -29,7 +29,7 @@ On-device macOS health analyst. Inspects disk, memory, processes, network, secur
 
 1. Download the `.dmg` for the app you want from [Releases](https://github.com/linggen/linggen-releases/releases).
 2. Open it; drag the app into `/Applications`.
-3. First launch: the app spawns the bundled `ling` engine on `127.0.0.1:9898` (or reuses one already running). The daemon self-terminates after 5 min idle.
+3. First launch: the app spawns the bundled `ling` engine on `127.0.0.1:9527` (or reuses one already running). The daemon self-terminates after 5 min idle.
 
 All Linggen apps share one local daemon and one `~/.linggen/` directory (sessions, memory, skills, credentials).
 
